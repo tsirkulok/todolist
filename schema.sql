@@ -18,7 +18,7 @@ CREATE TABLE projects (
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    status ENUM('todo', 'in_progress', 'done') DEFAULT 'todo',
+    status ENUM('todo', 'inprogress', 'completed') DEFAULT 'todo',
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
