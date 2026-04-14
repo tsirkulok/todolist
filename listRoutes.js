@@ -73,7 +73,7 @@ router.patch("/update-status/:id", async (req,res)=>{
             res.status(404).json({"status":"error", "message":"Ви ввели не те id"})
             return;
         } else{
-        res.status(200).json({"status": "succseful", "message": `Завдання з id ${id} успішно змінено!`})
+        res.status(200).json({"status": "succseful", "message": `Статус з id ${id} успішно змінено!`})
         }
     } else {
         res.status(400).json({"status":"error","message":"Ви вказали не правильний статус"})
