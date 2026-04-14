@@ -1,8 +1,7 @@
 const express = require("express")
-require("dotenv").config()
 const router = express.Router();
-const authController = require("./authController")
-const verify = require("./auth")
+const authController = require("../controllers/authController")
+const verify = require("../auth")
 router.post("/reg", async (req,res) =>{
     try {
     const {email, password,role, secret} = req.body;

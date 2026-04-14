@@ -1,4 +1,4 @@
-const db = require("./db")
+const db = require("../db/db")
 const todoController={
     getAllTasks: async (userId) =>{
         //СТВОРЮЄМО SQL ЗАПИТ ДЛЯ ТОГО ЩОБ ПОЛУЧИТИ

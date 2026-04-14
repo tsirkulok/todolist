@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const todoController = require("./todoController")
+const todoController = require("../controllers/todoController")
 const { error } = require("node:console")
-const verify = require("./auth")
+const verify = require("../auth")
 router.use(verify);
 
 router.get("/readAll", async(req,res)=>{

@@ -1,8 +1,8 @@
 const express = require("express");
-const authRoutes = require('./authRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 require("dotenv").config();
-const listRoutes = require("./listRoutes");
+const listRoutes = require("./routes/listRoutes");
 const app = express();
 const PORT = process.env.PORT
 app.use(express.json());
