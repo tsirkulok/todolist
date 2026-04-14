@@ -1,8 +1,13 @@
 const db = require("./db")
 const todoController={
-    getAllTasks: async () =>{
+    getAllTasks: async (userId) =>{
         //СТВОРЮЄМО SQL ЗАПИТ ДЛЯ ТОГО ЩОБ ПОЛУЧИТИ
-        const [rows] = await db.execute("SELECT * FROM tasks");
+        const sql = `
+        SELECT tasks.* FROM tasks 
+        JOIN projects ON tasks.project_id = projects.id 
+        WHERE projects.client_id = ?
+    `;
+        const [rows] = await db.execute(sql,[userId]);
         return rows;
 
     },

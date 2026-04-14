@@ -2,13 +2,13 @@ const express = require("express")
 const router = express.Router()
 const todoController = require("./todoController")
 const { error } = require("node:console")
-const e = require("express")
-const { title } = require("node:process")
-const { todo } = require("node:test")
+const verify = require("./auth")
+router.use(verify);
 
 router.get("/readAll", async(req,res)=>{
     try{
-        const allTasks = await todoController.getAllTasks();
+        const id = req.user.id
+        const allTasks = await todoController.getAllTasks(id);
         res.json(allTasks);
     } catch(err){
         console.error(err);
@@ -17,6 +17,9 @@ router.get("/readAll", async(req,res)=>{
 })
 
 router.post("/add", async (req,res) =>{
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ "status": "error", "message": "Доступ заборонено. Тільки для адміна." });
+    }
     try{
     const task = req.body;
     await todoController.addTask(task);
@@ -29,6 +32,9 @@ router.post("/add", async (req,res) =>{
 })
 
 router.delete("/delete/:id", async (req,res) =>{
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ "status": "error", "message": "Доступ заборонено. Тільки для адміна." });
+    }
     try{
         const id = req.params.id;
         const result = await todoController.deleteTask(id);
@@ -45,6 +51,9 @@ router.delete("/delete/:id", async (req,res) =>{
     }
 })
 router.patch("/update/:id", async (req,res)=>{
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ "status": "error", "message": "Доступ заборонено. Тільки для адміна." });
+    }
     try{
         const id = req.params.id;
         const { title } = req.body;
@@ -63,6 +72,9 @@ router.patch("/update/:id", async (req,res)=>{
     }
 })
 router.patch("/update-status/:id", async (req,res)=>{
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ "status": "error", "message": "Доступ заборонено. Тільки для адміна." });
+    }
     try{
         const statuses = ["todo", "inprogress", "completed"]
         const id = req.params.id;
